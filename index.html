@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Parcial 1 - Sofia Vigliaccio</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <a href="historial.html" class="btn btn-primary m-3">VER HISTORIAL</a>
+    <div id="app">
+        <div class="modal" tabindex="-1" style="display: block" v-show="estadoModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ rickandmortyActual?.name }}</h5>
+                        <button type="button" @click="ocultarModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img :src="rickandmortyActual?.image" :alt="'Imagen de ' + rickandmortyActual?.name" class="img-fluid mb-3">
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Género:</strong> {{ rickandmortyActual?.gender }}</p>
+                                <p><strong>Especie:</strong> {{ rickandmortyActual?.species }}</p>
+                                <p><strong>Origen:</strong> {{ rickandmortyActual?.name_origin }}</p>
+                                <p><strong>Locación:</strong> {{ rickandmortyActual?.name_location }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button @click="ocultarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4" v-for="character in rickandmorty">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ character.name }}</h5>
+                        <p class="card-text badge text-bg-warning">{{ character.gender }}</p>
+                        <p class="card-text">{{ character.url }}</p>
+                        <button @click="(e)=>{verRickAndMorty(character.url)}" class="btn btn-primary">+Info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
