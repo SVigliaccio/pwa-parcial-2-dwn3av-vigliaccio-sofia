@@ -1,0 +1,197 @@
+.food,
+.food li {
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    margin: 15px;
+}
+
+body {
+    font:                       20px/25px verdana
+}
+
+[v-cloak] {
+    display:                    none;
+}
+
+li {
+    text-align:                 center;
+    display:                    inline-block;
+    width:                      200px;
+}
+
+li a {
+    text-decoration:            none;
+}
+
+.gris{
+    color:                      gray;
+}
+
+.favorito {
+    background:                 url(../img/star.png) no-repeat center;
+    padding:                    50px 0px 0px 50px;
+    cursor:                     pointer;
+    color:                      goldenrod;
+}
+
+img{
+    padding-bottom:             10px;
+}
+
+.noFavorito{
+    background:                 url(../img/star.png) no-repeat center;
+    padding:                    50px 0px 0px 50px;
+    filter:                     grayscale(100%);
+    cursor:                     pointer;
+}
+
+.info-food{
+    background-size:            35px !important; 
+    background:                 url(../img/info.png) no-repeat center;
+    padding:                    50px 0px 0px 50px;
+    cursor:                     pointer;
+}
+
+button {
+    font-weight:                bold;
+    display:                    block;
+    padding:                    10px;
+    margin:                     0 auto;
+    border:                     none;
+    width:                      100%;
+}
+
+html,body {
+    background-color:           rgb(238,161,205);
+}
+
+div.container.mt-5{
+    background-color:           rgb(253,228,242);
+    border-radius:              15px;
+}
+
+input#buscador{
+    margin-top:                 15px
+}
+
+form{
+    position:                   sticky;
+    padding:                    60px 15px;    
+    height:                     fit-content;
+    top:                        0px;
+}
+
+input {
+    border-radius:              0.375rem;;
+    font-weight:                bold;
+    display:                    block;
+    padding:                    10px;
+    margin:                     0 auto;
+    width:                      100%;
+}
+
+.container{
+    flex-direction:             column;
+    align-items:                center;
+    display:                    flex;
+    width:                      100%;
+}
+
+.text-bg-goldenrod {
+    background-color:           goldenrod;
+    color:                      #fff!important;
+}
+
+.botonera{
+    justify-content:            space-around;
+    align-items:                center;
+    user-select:                none;
+    text-align:                 center;
+    margin:                     20px 0px ;
+}
+
+.botonera>label{
+    border-radius:              10px;
+    padding:                    5px 10px;
+    border:                     1px solid rgb(153, 153, 153);
+}
+
+.botonera>label>input{
+    visibility:                 hidden;
+    position:                   absolute;
+    opacity:                    0;
+    top:                        -10px;
+}
+
+.pressed{
+    box-shadow:                 3px 3px 4px 0px rgba(0,0,0,0.75) inset;
+    transition:                 box-shadow 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.pressed::after{
+    background-color:           rgb(246, 246, 246);
+    box-shadow:                 0px 1px 1px 0px rgba(0,0,0,0.01) inset;
+}
+
+.spin{
+    backface-visibility:        hidden;
+    /* box-sizing:                 content-box; */
+    transform:                  rotateX(180deg);
+
+
+    transition:                 all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);  
+}
+
+li.spin{
+    backface-visibility:        visible;
+    -webkit-box-shadow:         10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow:            10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow:                 10px 10px 5px 0px rgba(0,0,0,0.75);
+    height:                     230px !important;
+}
+
+.spin::after,.spin::before{
+    transform:                  rotateX(0deg);      
+}
+
+[class*="not"]{
+    backface-visibility:        hidden;
+    transform:                  rotateX(0deg);
+}
+
+.pos{
+    position:                   absolute;
+    width:                      95.5%;
+}
+
+.desc{
+    display:                    none !important;
+}
+
+[class*="not"].desc{
+    backface-visibility:        visible;
+    transform:                  rotateX(180deg);   
+    display:                    flex !important;
+}
+
+.ingridient{
+    text-align:                 center !important;
+    padding:                    5px !important;
+    margin:                     5px !important;
+    width:                      30% !important;
+}
+
+ul.anchura{
+    width:                      480px !important;
+}
+
+.btn-rosa {
+    background-color:           rgb(258,181,225);
+    border-color:               rgb(238,161,205);
+    color:                      #000;
+}
+.btn-rosa:hover{
+    border-color:               rgb(238,161,205);
+    background-color:           rgb(238,161,205);
+}
