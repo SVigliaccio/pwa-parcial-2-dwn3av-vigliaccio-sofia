@@ -195,3 +195,8 @@ ul.anchura{
     border-color:               rgb(238,161,205);
     background-color:           rgb(238,161,205);
 }
+.sticky {
+    position: fixed;
+    top: 1rem;
+    right: 2rem;
+}

@@ -222,6 +222,8 @@ Vue.component("componente-listado", {
 var app = new Vue({
     el: ".container",
     data: {
+        instalacionPendiente: true,
+        instalacionPendiente: null,
         foods: [
             {
                 description:    "Pescado y arroz envueltos en alga.",
@@ -329,6 +331,32 @@ var app = new Vue({
             },
         ]
     },//cierre data
+    methods: {
+        instalarAplicacion() {
+            if(this.eventoDeInstalacion != null) {
+                this.eventoDeInstalacion.prompt()
+                    .then(({outcome}) => {
+                        if(outcome === "accepted") {
+                            this.instalacionPendiente = false;
+                        } else {
+                            console.log("no se instaló");
+                        }
+                    });
+            } else {
+                console.log("no se puede instalar");
+            }
+        },
+    },
+    mounted() {
+        window.addEventListener("beforeinstallprompt", (event) => {
+            this.eventoDeInstalacion = event;
+            this.instalacionPendiente = true;
+        });
+
+        if(this.eventoDeInstalacion == null) {
+            this.instalacionPendiente = false;
+        }
+    }
 })
 
 /**
