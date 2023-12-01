@@ -22,10 +22,83 @@
         <div class="row sticky" v-if="instalacionPendiente">
             <button @click="instalarAplicacion" id="install" type="button" class="btn btn-info">Instalar aplicación</button>
         </div>
+        <componente-contacto></componente-contacto>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/app.js"></script>
+
+    <!-- Modals -->
+    <div class="modal fade" id="modal-dudas" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modal-dudas-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-dudas-label">¿Dudas? aquí podría encontrar respuestas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <details>
+                        <summary>¿Cómo filtro por tipo de comida?</summary>
+                        <p>Hay 4 botones en la pantalla que vienen presionados de forma predeterminada, eso quiere decir, que si solo presionas el boton de "Mostrar todos" te traerá todos los tipos de recetas que tenemos actualmente. También puede desmarcar los tipos que no quiera listar. </p>
+                    </details>
+                    <details>
+                        <summary>¿Puedo agregar recetas?</summary>
+                        <p>Puede escribirnos de forma detallada la receta que desea agregar y evaluaremos en un breve período su integración al recetario.</p>
+                    </details>
+                    <details>
+                        <summary>¿Qué puedo hacer si me falla el recetario?</summary>
+                        <p>En caso de algún problema, puede escribirnos mediante la plataforma, le pediremos un mail y un breve mensaje de lo que sucede. Le responderemos a esa casilla de mensaje a la brevedad.</p>
+                    </details>
+                    <details>
+                        <summary>¿Cómo les escribo?</summary>
+                        <p>Desplegando el mismo menú con el que entró a esta seccion, pero eligiendo la opcion del correo <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> .</p>
+                    </details>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-rosa" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-mail" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modal-mail-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-mail-label">¡ Envíenos un mensaje !</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Envíenos un mensaje, le contestaremos a la brevedad.</p>
+                    <form class="form-mail" action="#" method="post">
+                        <div class="mb-2">
+                          <label for="email" class="col-form-label p-0">Email</label>
+                          <input type="text" class="form-control" id="email" placeholder="example@mail.com">
+                        </div>
+                        <div class="mb-2">
+                            <label for="asunto-mail" class="col-form-label p-0">Asunto</label>
+                            <input list="sugerencias-asunto" id="asunto-mail" class="form-control" placeholder="Escribe aquí el asunto...">
+                            <datalist id="sugerencias-asunto">
+                              <option value="Nueva receta">
+                              <option value="Error en recetario">
+                              <option value="Consultas varias">
+                            </datalist>
+                        </div>
+                        <div class="mb-2">
+                          <label for="message-mail" class="col-form-label p-0">Mensaje</label>
+                          <textarea class="form-control" id="message-mail" placeholder="Escribe aquí el mensaje..."></textarea>
+                        </div>
+                      </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+                    <button type="button" class="btn btn-rosa">Enviar</button>
+                </div>
+            </div>
+        </div>
 
 </body>
 

@@ -115,6 +115,7 @@ input {
     border-radius:              10px;
     padding:                    5px 10px;
     border:                     1px solid rgb(153, 153, 153);
+    background-color:           #e718a9;
 }
 
 .botonera>label>input{
@@ -124,9 +125,17 @@ input {
     top:                        -10px;
 }
 
-.pressed{
+.botonera>label.no-pressed{
+    border: 1px solid #e718a9;
+    box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 2px 0px rgba(0,0,0,0.75);
+}
+
+.botonera>label.pressed{
     box-shadow:                 3px 3px 4px 0px rgba(0,0,0,0.75) inset;
     transition:                 box-shadow 0.1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color:           rgb(258,181,225);
 }
 
 .pressed::after{
@@ -199,4 +208,78 @@ ul.anchura{
     position: fixed;
     top: 1rem;
     right: 2rem;
+}
+
+/*Contacto*/
+.menu-contact{
+    left: 18px;
+    position: absolute;
+    top: 22px;
+}
+.options > div{
+    z-index: 10;
+    transition: allb450ms linear;
+}
+.check, .openButtom, .options > div{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-color: #e718a9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+div i{
+    color: #041119;
+    font-size: 24px;
+}
+.openButtom{
+    transform: rotate(0deg);
+    transition: transform 450ms ease;
+    z-index: 20;
+    background-color: #e718a9;
+}
+.check{
+    opacity: 0;
+    z-index: 30;
+}
+.check:checked ~ .openButtom ~ .options > div:first-child{
+    margin-left: 180px;
+}
+.check:checked ~ .openButtom ~ .options > div:nth-child(even){
+    margin-left: 120px;
+}
+.check:checked ~ .openButtom ~ .options > div:last-child{
+    margin-left: 60px;
+}
+.check:checked ~ .openButtom{
+    transform: rotate(180deg);
+}
+
+/*modal*/
+details{
+    margin-top: 5px;
+}
+
+details>summary{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+details>p{
+    font-size: 14px;
+}
+
+form.form-mail{
+    padding: 0;
+}
+
+#modal-mail p{
+    font-size: 16px;
+}
+
+textarea.form-control {
+    height: 150px;
 }

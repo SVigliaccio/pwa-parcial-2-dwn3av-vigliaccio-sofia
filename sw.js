@@ -5,7 +5,6 @@ const urlsToCache = [
   '/',
   PATH_ROOT+'index.html',
   PATH_ROOT+'css/styles.css',
-  PATH_ROOT+'img/favicon/favicon.ico',
   PATH_ROOT+'scripts/main.js',
   PATH_ROOT+'scripts/vue.js',
   PATH_ROOT+'scripts/vue2-filters.js',
