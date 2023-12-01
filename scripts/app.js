@@ -224,112 +224,7 @@ var app = new Vue({
     data: {
         instalacionPendiente: true,
         instalacionPendiente: null,
-        foods: [
-            {
-                description:    "Pescado y arroz envueltos en alga.",
-                ingredients:    ['Arroz', 'Pescado', 'Alga'],
-                temperature:    ["Frio"],
-                timeOfDay:      ["Almuerzo", "Cena"],
-                typeFood:       ["Salado"],
-                favorite:       false,
-                origin:         6,
-                image:          "maki_roll.png",
-                name:           "Rollitos maki",
-                link:           "https://gastronomiaycia.republica.com/2008/08/26/recetas-sushi-maki-sushi/",
-                id:             1,
-            },
-            {
-                description:    "Superesponjosa.",
-                ingredients:    ['Harina de maiz'],
-                temperature:    ["Caliente", "Frio"],
-                timeOfDay:      ["Desayuno", "Almuerzo", "Merienda", "Cena"],
-                typeFood:       ["Salado"],
-                favorite:       false,
-                origin:         2,
-                image:          "tortilla_maiz.png",
-                name:           "Tortilla de maiz",
-                link:           "https://www.cocinista.es/web/es/recetas/cocina-internacional/america/tortillas-de-maiz.html",
-                id:             2,
-            },
-            {
-                description:    "Cremoso, dulce y divertido de comer.",
-                ingredients:    ['Leche', 'Azúcar', 'Arroz'],
-                temperature:    ["Caliente", "Frio"],
-                timeOfDay:      ["Desayuno", "Almuerzo", "Merienda", "Cena"],
-                typeFood:       ["Dulce"],
-                favorite:       false,
-                origin:         3,
-                image:          "arroz_leche.png",
-                name:           "Arroz con leche",
-                link:           "https://www.paulinacocina.net/arroz-con-leche-facil-delicioso/13790",
-                id:             3,
-            },
-            {
-                description:    "Difícil encontrar a alguien a quien no le guste.",
-                ingredients:    ['Leche', 'Azúcar'],
-                temperature:    ["Frio"],
-                timeOfDay:      ["Postre", "Merienda"],
-                typeFood:       ["Dulce"],
-                favorite:       false,
-                origin:         0,
-                image:          "helado.png",
-                name:           "Helado",
-                link:           "https://www.directoalpaladar.com/directo-al-paladar/cinco-helados-buscados-internet-sus-recetas-faciles-deliciosas",
-                id:             4,
-            },
-            {
-                description:    "Un bocado muy práctico para los exploradores.",
-                ingredients:    ['Pan', 'Zanahoria', 'Berenjena'],
-                temperature:    ["Caliente"],
-                timeOfDay:      ["Almuerzo", "Cena"],
-                typeFood:       ["Salado"],
-                favorite:       false,
-                origin:         4,
-                image:          "hamburguesa_vegetariana.png",
-                name:           "Hamburguesa vegetariana",
-                link:           "https://elgourmet.com/recetas/hamburguesa-vegetariana-de-betabel-y-zanahoria/",
-                id:             5,
-            },
-            {
-                description:    "Una pila doble de tortitas ligeras y esponjosas.",
-                ingredients:    ['Harina de trigo', 'Huevo', 'Manteca'],
-                temperature:    ["Caliente"],
-                timeOfDay:      ["Desayuno", "Merienda"],
-                typeFood:       ["Dulce"],
-                favorite:       false,
-                origin:         5,
-                image:          "pancakes.png",
-                name:           "Pancakes",
-                link:           "https://elgourmet.com/recetas/hot-pancakes/",
-                id:             6,
-            },
-            {
-                description:    "Extremadamente popular, y con motivo.",
-                ingredients:    ['Harina de trigo', 'Tomate', 'Queso'],
-                temperature:    ["Caliente"],
-                timeOfDay:      ["Almuerzo", "Cena"],
-                typeFood:       ["Salado"],
-                favorite:       false,
-                origin:         1,
-                image:          "pizza.png",
-                name:           "Pizza",
-                link:           "https://www.recetasgratis.net/receta-de-pizza-casera-31391.html",
-                id:             7,
-            },
-            {
-                description:    "Todo un clasico.",
-                ingredients:    ['Harina de trigo', 'Tomate'],
-                temperature:    ["Caliente"],
-                timeOfDay:      ["Almuerzo", "Cena"],
-                typeFood:       ["Salado"],
-                favorite:       false,
-                origin:         1,
-                image:          "spaghetti.png",
-                name:           "Spaghetti",
-                link:           "https://recetinas.com/recetas-faciles-de-espaguetis/",
-                id:             8,
-            },
-        ]
+        foods: []
     },//cierre data
     methods: {
         instalarAplicacion() {
@@ -347,7 +242,7 @@ var app = new Vue({
             }
         },
     },
-    mounted() {
+    async mounted() {
         window.addEventListener("beforeinstallprompt", (event) => {
             this.eventoDeInstalacion = event;
             this.instalacionPendiente = true;
@@ -355,6 +250,12 @@ var app = new Vue({
 
         if(this.eventoDeInstalacion == null) {
             this.instalacionPendiente = false;
+        }
+
+        if(this.foods.length === 0) {
+            const response = await fetch("https://recetario--sofiavigliaccio.repl.co/recetas");
+            const data = await response.json();
+            this.foods = data.results;
         }
     }
 })
