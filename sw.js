@@ -11,6 +11,8 @@ const urlsToCache = [
   PATH_ROOT+'scripts/vue2-filters.js',
   PATH_ROOT+'scripts/app.js',
   PATH_ROOT+'sw.js',
+  'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css',
+  'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js',
   // Agrega aquí otros recursos estáticos como CSS, imágenes, etc.
 ];
 
@@ -22,7 +24,17 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
-    event.respondWith(
+  const requestUrl = new URL(event.request.url);
+
+  // Verifica si el esquema de la solicitud es 'chrome-extension'
+  if (requestUrl.protocol === 'chrome-extension:') {
+    // Maneja lógica específica para extensiones de Chrome
+    // En este caso, simplemente devolvemos una respuesta predeterminada
+    event.respondWith(new Response('\'Recurso de extensión de Chrome no compatible\''));
+    return;
+  }
+
+  event.respondWith(
       // Primero se intenta recuperar la respuesta del network
       fetch(event.request)
         .then(networkResponse => {
@@ -39,7 +51,7 @@ self.addEventListener('fetch', event => {
         .catch(async () => {
           // Si la conexión de red falla, intenta usar la data de la caché
           return caches.match(event.request)
-            .then(cachedResponse => cachedResponse || new Response('Sin conexión a internet'));
+            .then(cachedResponse => cachedResponse || new Response('\'Sin conexión a internet\''));
         })
     );
   });
