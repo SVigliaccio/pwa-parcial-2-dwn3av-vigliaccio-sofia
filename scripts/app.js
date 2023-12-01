@@ -1,7 +1,4 @@
 
-
-
-
 Vue.component("componente-form", {
     data:function(){
         let arr      = JSON.parse(localStorage.getItem("favorite"));
