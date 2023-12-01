@@ -8,6 +8,7 @@ const urlsToCache = [
   PATH_ROOT+'img/favicon/favicon.ico',
   PATH_ROOT+'scripts/main.js',
   PATH_ROOT+'scripts/vue.js',
+  PATH_ROOT+'scripts/vue2-filters.js',
   PATH_ROOT+'scripts/app.js',
   PATH_ROOT+'sw.js',
   // Agrega aquí otros recursos estáticos como CSS, imágenes, etc.
@@ -38,7 +39,6 @@ self.addEventListener('fetch', event => {
         .catch(async () => {
           // Si la conexión de red falla, intenta usar la data de la caché
           return caches.match(event.request)
-            .then(console.log('no hay intelte'))
             .then(cachedResponse => cachedResponse || new Response('Sin conexión a internet'));
         })
     );
