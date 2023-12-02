@@ -272,7 +272,7 @@ details>p{
     font-size: 14px;
 }
 
-form.form-mail{
+form#form-mail{
     padding: 0;
 }
 

@@ -1,3 +1,59 @@
+Vue.component("componente-mail", {
+    data: function () {
+        return {
+            title: null,
+            message: null,
+            enviado: null,
+        }
+    },
+    props: [],
+    template: `
+    <div v-if="enviado !== null" class="modal fade" id="modal-respuesta-mail" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modal-respuesta-mail-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-respuesta-mail-label">{{title}}</h5>
+                    <button type="button" class="btn-close"  @click="resetParams()" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{message}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" @click="resetParams()" class="btn btn-rosa" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    `,
+    mounted() {
+        const url     = new URL(window.location.href);
+        this.enviado  = url.searchParams.get('enviado');
+        console.log("parametro enviado:", this.enviado);
+        if(this.enviado){
+            this.title   = '¡Mensaje enviado!';
+            this.message = 'Su mensaje fue enviado correctamente, le responderemos a la brevedad a la casilla de mail que nos aclaro. ¡Muchas gracias!';
+        }else if(!this.enviado && this.enviado !== null){
+            this.title   = 'Oops... No se ha podido enviar su mensaje!';
+            this.message = 'Lo sentimos hubo un error al intentar enviar su mensaje, por favor vuelva a intentarlo en unos minutos o envíenos un correo por fuera de la plataforma.';
+        }
+
+    },
+    updated() {
+        // Este código se ejecuta después de que el componente ha sido actualizado y el DOM ha sido modificado.
+        if(this.enviado !== null){
+            //abro modal si existe el parametro enviado.
+            modalMail = new bootstrap.Modal(document.getElementById('modal-respuesta-mail'));
+            modalMail.show();
+        }
+    },
+    methods: {
+        resetParams(){
+            window.location.search = '';
+        }
+    }
+});
+
 Vue.component("componente-contacto", {
     data: function () {
         return {
@@ -94,7 +150,6 @@ Vue.component("componente-form", {
     `,
     methods: {
         setCheck: function () {
-            console.log(this.favorites)
             let input = event.target;
             // input.parentNode.classList.toggle('pressed');
             if(input.parentNode.classList.value === 'pressed'){
