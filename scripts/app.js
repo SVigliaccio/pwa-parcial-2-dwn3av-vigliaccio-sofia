@@ -29,7 +29,6 @@ Vue.component("componente-mail", {
     mounted() {
         const url     = new URL(window.location.href);
         this.enviado  = url.searchParams.get('enviado');
-        console.log("parametro enviado:", this.enviado);
         if(this.enviado){
             this.title   = '¡Mensaje enviado!';
             this.message = 'Su mensaje fue enviado correctamente, le responderemos a la brevedad a la casilla de mail que nos aclaro. ¡Muchas gracias!';
@@ -49,7 +48,7 @@ Vue.component("componente-mail", {
     },
     methods: {
         resetParams(){
-            window.location.search = '';
+            window.location = window.location.pathname; //para eliminar los parametros y el signo de pregunta.
         }
     }
 });

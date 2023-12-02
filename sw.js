@@ -1,9 +1,10 @@
 // service worker 
-const PATH_ROOT = '/davinci/aplicaciones_web_progresivas/parcial/pwa-parcial-2-dwn3av-vigliaccio-sofia/';
+const PATH_ROOT = '/davinci/aplicaciones_web_progresivas/parcial/pwa-parcial-2-dwn3av-vigliaccio-sofia/';//actualizar segun la ubicacion del proyecto
 const CACHE_NAME = 'my-cache-v1';
 const urlsToCache = [
   '/',
   PATH_ROOT+'index.html',
+  PATH_ROOT+'errorNetwork.html',
   PATH_ROOT+'css/styles.css',
   PATH_ROOT+'scripts/main.js',
   PATH_ROOT+'scripts/vue.js',
@@ -50,7 +51,14 @@ self.addEventListener('fetch', event => {
         .catch(async () => {
           // Si la conexión de red falla, intenta usar la data de la caché
           return caches.match(event.request)
-            .then(cachedResponse => cachedResponse || new Response('\'Sin conexión a internet\''));
+            .then(cachedResponse => cachedResponse || new Response(null, {
+                    status: 302,
+                    statusText: 'Found',
+                    headers: {
+                        'Location': 'errorNetwork.html'  // Ruta de la página a la que redirigir
+                    }
+                }) 
+            );
         })
     );
   });
