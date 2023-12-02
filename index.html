@@ -17,7 +17,6 @@
     <div class="container mt-5" v-cloak>
         <h1 class="mt-5">Recetario</h1>
         <componente-form
-            :foods="foods"
         ></componente-form>
         <div class="row sticky" v-if="instalacionPendiente">
             <button @click="instalarAplicacion" id="install" type="button" class="btn btn-info">Instalar aplicación</button>

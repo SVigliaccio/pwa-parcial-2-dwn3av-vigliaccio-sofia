@@ -89,31 +89,20 @@ Vue.component("componente-contacto", {
 
 Vue.component("componente-form", {
     data: function () {
-        let arr = JSON.parse(localStorage.getItem("favorite"));
-        let foods = [...this.foods];
 
-        let filtered = [];
-        if (localStorage.favorite) { //me traigo lo que tengo en favoritos
-
-            // agrego clase de favoritos
-            arr.forEach(function (id) {
-                let regIndex = foods.findIndex(elem => elem.id == id);
-                foods[regIndex].favorite = true;
-                filtered.push(foods[regIndex]);
-            });
-        }
         return {
             form_data: {
                 food: "",
                 timeOfDay: ['Merienda', 'Almuerzo', 'Cena', 'Postre'], //se coloca por default todos los filtros marcados
             },
-            filteredFood: filtered,
+            filteredFood: [],
             showButton: true,
             buttonText: "Mostrar todo",
-            btnSearch: false
+            btnSearch: false,
+            foods: []
         }
     },
-    props: ['foods'],
+    props: [],
     template: `
     <div class="mt-5 col-12 d-flex">
         <form v-on:submit.prevent class="col-5 text-center">
@@ -178,8 +167,39 @@ Vue.component("componente-form", {
                 this.showButton = true;
                 this.buttonText = "Mostrar todo";
             }
+        },
+        async cargarDatos() {
+            try {
+                const response = await fetch("https://recetario--sofiavigliaccio.repl.co/recetas");
+                const data = await response.json();
+                this.foods = data.results;
+                return this.foods;
+            } catch (error) {
+                console.error(error.message);
+                throw error; // Re-lanzar el error para que pueda ser manejado por el componente que llama.
+            }
         }
-    }
+    },
+    async mounted() {
+        // Realizar operaciones asíncronas para inicializar los datos
+        let arr = JSON.parse(localStorage.getItem("favorite"));
+        let foodsCharge = await this.cargarDatos();
+
+        let filtered = [];
+
+        if (localStorage.favorite) {
+            arr.forEach(function (id) {
+                let regIndex = foodsCharge.findIndex(elem => elem.id == id);
+                foodsCharge[regIndex].favorite = true;
+                filtered.push(foodsCharge[regIndex]);
+            });
+        }
+
+        // Actualizar las propiedades de datos después de la carga asíncrona
+        this.filteredFood = filtered;
+        this.foods = foodsCharge;
+    },
+
 });
 
 
